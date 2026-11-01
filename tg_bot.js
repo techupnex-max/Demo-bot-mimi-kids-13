@@ -415,3 +415,5 @@ bot.on("callback_query", async (query) => {
 });
 
 console.log("✅ Telegram-бот «mimi kids 13» успешно запущен и ждёт заказов!");
+const http = require('http');
+http.createServer((req, res) => res.end('Bot is running')).listen(process.env.PORT || 3000);
