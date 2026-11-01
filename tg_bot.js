@@ -270,17 +270,15 @@ bot.on("message", async (msg) => {
         },
       );
 
-    case "WAIT_PHONE":
-      // Поддержка как ручного ввода, так и кнопки "Поделиться контактом"
-      const phoneInput = msg.contact ? msg.contact.phone_number : text;
-      if (!msg.contact && !REGEX.PHONE.test(phoneInput)) {
-        return bot.sendMessage(
-          chatId,
-          "Кажется, в номере закралась опечатка 🤔\nПожалуйста, введите корректный номер телефона из 11 цифр, начиная с +7 или 8 (например: +79991234567):",
-        );
-      }
-      session.data.phone = phoneInput;
-      session.step = "WAIT_DELIVERY_METHOD";
+    case 'WAIT_PHONE': const phoneInput = msg.contact ? msg.contact.phone_number : text; const digitsOnly = String(phoneInput).replace(/[^0-9]/g, '');
+  if (!msg.contact && (digitsOnly.length < 10 || digitsOnly.length > 12)) {
+    return bot.sendMessage(
+      chatId,
+      'Кажется, в номере закралась опечатка 🤔\nПожалуйста, введите корректный номер телефона (например: +79991234567 или 89991234567):'
+    );
+  }
+  session.data.phone = phoneInput;
+  session.step = 'WAIT_DELIVERY_METHOD';
 
       await bot.sendMessage(chatId, "Номер принят! 👌", {
         reply_markup: { remove_keyboard: true },
