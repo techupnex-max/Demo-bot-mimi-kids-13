@@ -1,0 +1,11 @@
+{
+  "name": "demo-bot-mimi-kids-13",
+  "version": "1.0.0",
+  "main": "tg_bot.js",
+  "scripts": {
+    "start": "node tg_bot.js"
+  },
+  "dependencies": {
+    "node-telegram-bot-api": "^0.66.0"
+  }
+}
